@@ -197,11 +197,13 @@ elif media_type == 'image':
 			print 'Image cut.'
 
 		# UPSCALE IMAGE TO DISPLAY SIZE
-		if width < vw:
+		# Supersampling factor to account for Retina Displays and DPI Scaling
+		scale = 2;
+		if width < scale*vw:
 
-			img = img.resize((int(vw), int(vh)), Image.BICUBIC)
-			width = vw
-			height = vh
+			img = img.resize((int(scale*vw), int(scale*vh)), Image.BICUBIC)
+			width = scale*vw
+			height = scale*vh
 
 			print 'Image upscaled.'
 		
